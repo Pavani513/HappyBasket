@@ -20,7 +20,7 @@ const route=express()
 route.use(express.json())
 // route.use(cors())
 route.use(cors({
-    // origin: 'http://localhost:5173', 
+    origin: 'https://happybasket.onrender.com', 
     origin: '*',
     credentials: true
 }));
