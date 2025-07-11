@@ -26,7 +26,7 @@ route.use(express.json())
 // }));
 
 
-const allowedOrigins = ["http://localhost:5173"];
+const allowedOrigins = ["http://localhost:5173",'https://happybasket.onrender.com'];
 route.use(cors({
     origin: function (origin, callback) {
         if (!origin || allowedOrigins.includes(origin)) {
