@@ -20,7 +20,7 @@ export const createProduct = createAsyncThunk(
             }
 
       const response = await axios.post(
-        "http://localhost:3000/api/productPost",
+        "https://happybasket.onrender.com/api/productPost",
         data
       );
       return response.data;

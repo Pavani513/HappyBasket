@@ -8,7 +8,7 @@ export const loginUser = createAsyncThunk(
     "login/loginUser",
     async (credentials, { rejectWithValue }) => {
         try {
-            const response = await axios.post("http://localhost:3000/api/login", credentials);
+            const response = await axios.post("https://happybasket.onrender.com/api/login", credentials);
             Cookies.set("token", response.data.token, { expires: 1 });
             return response.data;
         } catch (error) {

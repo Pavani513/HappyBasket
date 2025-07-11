@@ -5,7 +5,7 @@ export const getProducts = createAsyncThunk(
     "products/getProducts",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/userGet/`);
+            const response = await axios.get(`https://happybasket.onrender.com/api/userGet/`);
             return response.data; 
         } catch (error) {
             return rejectWithValue(error.response?.data || error.message);

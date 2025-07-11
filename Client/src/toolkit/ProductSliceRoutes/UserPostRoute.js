@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'https://happybasket.onrender.com/api';
 
 export const postProduct = createAsyncThunk(
     "products/postProduct",
