@@ -18,25 +18,25 @@ const route=express()
 
 //middlewares
 route.use(express.json())
-// route.use(cors())
-// route.use(cors({
-//     // origin: 'https://happybasket.onrender.com', 
-//     origin: '*',
-//     credentials: true
-// }));
-
-
-const allowedOrigins = ["http://localhost:5173",'https://happybasket.onrender.com'];
+route.use(cors())
 route.use(cors({
-    origin: function (origin, callback) {
-        if (!origin || allowedOrigins.includes(origin)) {
-            callback(null, true);
-        } else {
-            callback(new Error('Not allowed by CORS'));
-        }
-    },
+    // origin: 'https://happybasket.onrender.com', 
+    origin: '*',
     credentials: true
 }));
+
+
+// const allowedOrigins = ["http://localhost:5173",'https://happybasket.onrender.com'];
+// route.use(cors({
+//     origin: function (origin, callback) {
+//         if (!origin || allowedOrigins.includes(origin)) {
+//             callback(null, true);
+//         } else {
+//             callback(new Error('Not allowed by CORS'));
+//         }
+//     },
+//     credentials: true
+// }));
 route.use(express.urlencoded({ extended: true }));
 
 connectDB()
