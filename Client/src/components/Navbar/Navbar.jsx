@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { FaChevronDown, FaBars, FaTimes } from "react-icons/fa";
 import HappeBasket from "../../assets/hb_logo.png";
 import search from "../../assets/search.png";
+import Cookies from "js-cookie"; 
+import { logout } from "../../toolkit/AuthSliceRoutes/Login";
+
 
 const Navbar = ({ onSearch }) => {
   const navigate = useNavigate();
+      const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -18,10 +23,11 @@ const Navbar = ({ onSearch }) => {
     return () => clearTimeout(delayDebounce);
   }, [searchTerm, onSearch]);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-    navigate("/login");
-  };
+
+const handleLogout = () => {
+    dispatch(logout());             // clears cookies & Redux user state
+    navigate("/login");                  // navigate to signup/login page
+};
 
   const handleCategorySelect = (Category) => {
     setIsDropdownOpen(false);
@@ -107,11 +113,12 @@ const Navbar = ({ onSearch }) => {
         </div>
 
         <button
-          onClick={handleLogout}
-          className="bg-red-500 text-white font-bold px-4 py-2 rounded hover:bg-red-600 transition"
-        >
-          Logout
-        </button>
+    onClick={handleLogout}
+    className="px-4 py-2 text-center border-t border-gray-200 rounded bg-red-500 text-white font-bold px-4 py-2 rounded hover:bg-red-600 transition"
+>
+    Logout
+</button>
+
       </div>
 
       {/* Hamburger Menu (visible on mobile & tablet) */}
@@ -196,12 +203,12 @@ const Navbar = ({ onSearch }) => {
           </div>
 
           {/* Logout Button */}
-          <button
-            onClick={handleLogout}
-            className="px-4 py-2 text-center border-t border-gray-200 rounded bg-red-500 text-white font-bold px-4 py-2 rounded hover:bg-red-600 transition"
-          >
-            Logout
-          </button>
+         <button
+    onClick={handleLogout}
+    className="px-4 py-2 text-center border-t border-gray-200 bg-red-500 text-white font-bold rounded hover:bg-red-600 transition"
+>
+    Logout
+</button>
         </div>
       )}
     </nav>

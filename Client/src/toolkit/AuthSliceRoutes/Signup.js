@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from "js-cookie"; 
 
 const BASE_URL = "https://happybasket.onrender.com/api";
 
@@ -9,6 +10,10 @@ export const registerUser = createAsyncThunk(
     async (userData, { rejectWithValue }) => {
         try {
             const response = await axios.post(`${BASE_URL}/userPost`, userData);
+
+            const userId = response.data.user._id;
+            Cookies.set("userId", userId, { expires: 7 }); // expires in 7 days
+
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data.message || error.message);

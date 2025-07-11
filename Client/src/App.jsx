@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import { useState } from 'react';
 
 import UpdateProduct from "./pages/Product_MainPages/UpdateProduct";
-import PostProducts from "./pages/Product_MainPages/PostProducts";
 import ProductDetails from "./pages/Product_MainPages/GetProductDetails";
 import GetProducts from "./pages/Product_MainPages/GetProducts";
 import SignUp from "./pages/UserAuthPages/SignUp";
@@ -25,13 +24,11 @@ const handleSearch = (term) => {
 
   <>
         {!hideNavbar && <Navbar onSearch={handleSearch}/>}
-        {/* {<Categories onSearch={handleSearch}/>} */}
       <Routes>
         <Route path="/" element={<SignUp/>}/>
         <Route path="/login" element={<Login/>}/>
         <Route path="/productDetails/:id" element={<ProductDetails/>}/>
         <Route path="/products" element={<GetProducts searchTerm={searchTerm}/>} />
-        <Route path="/addProduct" element={<PostProducts />} />
         <Route path="/editProduct/:id" element={<UpdateProduct/>} />
         <Route path="/createProduct" element={<CreationPage/>}/>
         <Route path="/category/:category" element={<Categories searchTerm={searchTerm}/>}/>
