@@ -20,7 +20,8 @@ const route=express()
 route.use(express.json())
 // route.use(cors())
 route.use(cors({
-    origin: 'http://localhost:5173', // your React app port
+    // origin: 'http://localhost:5173', 
+    origin: '*',
     credentials: true
 }));
 route.use(express.urlencoded({ extended: true }));
@@ -40,6 +41,7 @@ route.use("/api",registerGetIdRoute)
 route.use("/api",registerPostRoute )
 route.use("/api",registerPutRoute )
 route.use("/api",loginPostRoute)
+
 
 
 
