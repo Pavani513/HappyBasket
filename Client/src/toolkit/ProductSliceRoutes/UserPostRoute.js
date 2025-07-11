@@ -7,13 +7,24 @@ export const postProduct = createAsyncThunk(
     "products/postProduct",
     async (newProduct, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`${BASE_URL}/userPost`, newProduct);
+            const formData = new FormData();
+            formData.append("image", newProduct.image); // File object
+            formData.append("title", newProduct.title);
+            formData.append("category", newProduct.category);
+            formData.append("description", newProduct.description);
+            formData.append("cost", newProduct.cost);
+            // Remove editorName here; capture from JWT on server
+
+            const response = await axios.post(`${BASE_URL}/productPost`, formData, {
+                headers: { "Content-Type": "multipart/form-data" }
+            });
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data || error.message);
         }
     }
 );
+
 
 const userPostSlice = createSlice({
     name: "postProduct",

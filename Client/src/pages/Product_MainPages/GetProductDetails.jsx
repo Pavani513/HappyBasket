@@ -4,12 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProductById } from '../../toolkit/ProductSliceRoutes/GetIdRoute';
 import Navbar from '../../components/Navbar/Navbar';
 
-
 const GetProductDetails = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     const { data, status, error } = useSelector((state) => state.getProductById);
-    // console.log(data)
 
     useEffect(() => {
         if (id) {
@@ -31,21 +29,40 @@ const GetProductDetails = () => {
 
     return (
         <div>
-            <Navbar/>
-        <div className="max-w-lg mx-auto mt-10 p-6 bg-white rounded shadow">
-            
-            {data?.image && (
-                <img
-                    src={data.image}
-                    alt={data.title}
-                    className="mt-4 rounded w-full h-100 object-cover"
-                />
-            )}
-            <p className="mb-2"><strong>Title:</strong> {data?.Title}</p>
-            <p className="mb-2"><strong>Category:</strong> {data?.Category}</p>
-            <p className="mb-2"><strong>Description:</strong> {data?.Description}</p>
-            <p className="mb-2"><strong>Cost:</strong> ₹{data?.Cost}</p>
-        </div>
+            <div className="max-w-lg mx-auto mt-17 mb-4 p-6 bg-white rounded-2xl shadow-2xl transition hover:shadow-2xl">
+                {data?.image && (
+                    <div className="w-full aspect-[4/2] rounded-xl overflow-hidden">
+                        <img
+                            src={data.image}
+                            alt={data.Title}
+                            className="w-full h-full object-contain"
+                        />
+                    </div>
+                )}
+
+                <h1 className="text-xl md:text-2xl font-bold m-4 text-gray-800 text-center">{data?.Title}</h1>
+
+                <div className="space-y-2">
+                    <p>
+                        <span className="inline-block bg-blue-100 text-blue-950 text-base md:text-xl font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            Category:
+                        </span>
+                        <span className="text-black font-semibold text-sm md:text-lg">{data?.Category}</span>
+                    </p>
+                    <p>
+                        <span className="inline-block bg-blue-100 text-blue-950 text-base md:text-xl font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            Description:
+                        </span>
+                        <span className="text-black text-sm md:text-lg">{data?.Description}</span>
+                    </p>
+                    <p>
+                        <span className="inline-block bg-blue-100 text-blue-950 text-base md:text-xl font-semibold mr-2 px-2.5 py-0.5 rounded">
+                            Cost:
+                        </span>
+                        <span className="text-black font-semibold text-sm md:text-lg">₹{data?.Cost}</span>
+                    </p>
+                </div>
+            </div>
         </div>
     );
 };

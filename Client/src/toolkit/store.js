@@ -7,6 +7,7 @@ import getIdSlice from './ProductSliceRoutes/GetIdRoute';
 
 import loginSlice from './AuthSliceRoutes/Login';
 import signupSlice from './AuthSliceRoutes/Signup';
+import creationSlice from './ProductSliceRoutes/CreationSliceRoute';
 
 
 
@@ -18,8 +19,10 @@ const store = configureStore({
         updateProduct:userPutSlice,
         deleteProduct:userDeleteSlice,
         getProductById:getIdSlice,
+        creation:creationSlice,
         login:loginSlice,
         signup:signupSlice
+
 
     },
 });

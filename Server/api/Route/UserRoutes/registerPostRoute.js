@@ -2,16 +2,24 @@ const express = require("express");
 const User = require("../../Modal/User");
 const router = express.Router();
 
-router.post("/register", async (req, res) => {
+// Register User
+router.post("/userPost", async (req, res) => {
     try {
-        const { username, email, password, confirmPassword } = req.body;
+        const { username, email, password } = req.body;
 
+
+        // Check if user already exists
+        const existingUser = await User.findOne({ email });
+        if (existingUser) {
+            return res.status(400).json({ message: "User with this email already exists." });
+        }
+
+        // Create and save user
         const newUser = new User({
             username,
             email,
             password,
         });
-        newUser.confirmPassword = confirmPassword;
 
         await newUser.save();
 

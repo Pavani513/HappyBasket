@@ -1,15 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import Cookies from "js-cookie";
 
-const BASE_URL = "http://localhost:3000/api";
 
 // Thunk for user login
 export const loginUser = createAsyncThunk(
     "login/loginUser",
     async (credentials, { rejectWithValue }) => {
         try {
-            const response = await axios.post(`${BASE_URL}/login`, credentials);
-            localStorage.setItem("token", response.data.token);
+            const response = await axios.post("http://localhost:3000/api/login", credentials);
+            Cookies.set("token", response.data.token, { expires: 1 });
             return response.data;
         } catch (error) {
             return rejectWithValue(error.response?.data.message || error.message);
@@ -37,9 +37,9 @@ const loginSlice = createSlice({
                 state.error = null;
             })
             .addCase(loginUser.fulfilled, (state, action) => {
-                state.status = "succeeded";
-                state.user = action.payload.user;
-            })
+    state.status = 'succeeded';
+    state.user = action.payload.user; 
+    })
             .addCase(loginUser.rejected, (state, action) => {
                 state.status = "failed";
                 state.error = action.payload;
